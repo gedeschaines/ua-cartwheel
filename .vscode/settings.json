@@ -1,0 +1,8 @@
+{
+    "terminal.integrated.env.linux": {
+        "LD_LIBRARY_PATH" : "./lib:",
+    },
+    "files.associations": {
+        "string": "cpp"
+    },
+}

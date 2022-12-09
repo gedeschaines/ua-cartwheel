@@ -1,0 +1,9 @@
+bin/*
+lib/*
+docs/html/*
+Examples/*
+*.o
+*.exe
+*~
+*.swp
+
