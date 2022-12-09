@@ -54,7 +54,7 @@ Notes:
 
 In the list below, names beginning with `./` indicate a folder, and those within parenthesis exist only in the workspace clone or copy of the ``ua-cartwheel`` repository.
 
-- `./.vscode` - Visual Studio Code IDE tasks and settings JSON scripts to build and execute Cartwheel components
+- `./.vscode` - Visual Studio Code IDE launch, settings and tasks JSON scripts to build, debug and run Cartwheel components from within the VS Code IDE
 - `(./bin)` - built Cartwheel non-demos executable files (workspace only folder)
 - `./data` - animated motion control modeling and visualization asset files
 - `./Demos` - interactControl animation demos source code and built executable files
