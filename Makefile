@@ -25,7 +25,7 @@ IPATH = -Iinclude
 CWLPATH = -Llib -lcartwheel
 
 # CFLAGS contains flags for the compiler
-CFLAGS = -g -w -fPIC -std=c++11 -fpermissive
+CFLAGS = -O0 -g -w -fPIC -std=c++11 -fpermissive
 
 # OS X
 ifeq "$(OSTYPE)" "darwin"
@@ -81,8 +81,8 @@ clean :
 
 interactControl : library
 	@if [ ! -e ./bin ]; then mkdir ./bin; fi
-	@rm ./bin/*
-	@rm ./Demos/*.exe
+	@rm -f ./bin/*
+	@rm -f ./Demos/*.exe
 	$(CC) $(CFLAGS) $(IPATH) -o src/interactControl.o -c src/interactControl.cpp
 	$(CC) $(CFLAGS) $(FRAMEWORKS) -o bin/interactControl src/interactControl.o $(CWLPATH) $(LPATH)  $(LIBS)
 	
