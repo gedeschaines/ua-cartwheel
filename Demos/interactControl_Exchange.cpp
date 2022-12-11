@@ -30,31 +30,40 @@ void render(void) { //Simulation loop
         
         //Pushing a Light Box
         if (nOpc == 0) {
-            g_simulator->doBehavior("Walk", g_visualization->getSelectedHuman().c_str(), 
-                    new Walk_Params(0, 1, 0.3, 0));
+
+            // Human 1 - Walk toward box, pick up blue ball, kick box, exchange blue 
+            //           ball with others red ball, walk backward, then catch blue ball
+            //           thrown by other and throw red ball to other.
+            g_simulator->doBehavior("Walk", g_visualization->getSelectedHuman().c_str(),
+                new Walk_Params(0, 1, 0.3, 0));
             g_simulator->doBehavior("PickUp", g_visualization->getSelectedHuman().c_str(), 
-                    new PickUp_Params(1, 3, "ball1", "Left"));
+                new PickUp_Params(1, 3, "ball1", "Left"));
             g_simulator->doBehavior("Kick", g_visualization->getSelectedHuman().c_str(), 
-                    new Kick_Params(3, 1.2));
-            g_simulator->doBehavior("GiveObj", g_visualization->getSelectedHuman().c_str(),
-                    new GiveObj_Params(4, 2, "Human2", "ball1", "Right"));       
-            
+                new Kick_Params(3, 1.2));
+            g_simulator->doBehavior("GiveObj", g_visualization->getSelectedHuman().c_str(), 
+                new GiveObj_Params(4, 2, "Human2", "ball1", "Right"));
             g_simulator->doBehavior("Walk", g_visualization->getSelectedHuman().c_str(), 
-                    new Walk_Params(5, 3.5, -1.5, 0));
+                new Walk_Params(5, 3.5, -1.5, 0));
             g_simulator->doBehavior("Catch", g_visualization->getSelectedHuman().c_str(), 
-                    new Catch_Params(8.5, 2.4, "ball1", "Left"));
+                new Catch_Params(8.5, 2.4, "ball1", "Left"));
             g_simulator->doBehavior("Throw", g_visualization->getSelectedHuman().c_str(), 
-                    new Throw_Params(10, 2, "Right", "ball2", Vector3d(0,2,4.5)));
+                new Throw_Params(10, 2, "Right", "ball2", Vector3d(0., 2., 4.5)));
             
-            
-            
-            g_simulator->doBehavior("Walk", "Human2", new Walk_Params(0, 4, 0.3, 3.14));
-            g_simulator->doBehavior("PickUp", "Human2", new PickUp_Params(0.5, 3, "ball2", "Left"));
-            g_simulator->doBehavior("GiveObj", "Human2", new GiveObj_Params(4, 2, "Human1", "ball2", "Right")); 
-            
-            g_simulator->doBehavior("Walk", "Human2", new Walk_Params(5, 3.5, 0.15, 3.14));
-            g_simulator->doBehavior("Throw", "Human2", new Throw_Params(8, 2, "Right", "ball1", Vector3d(0,1.3,-4.5)));
-            g_simulator->doBehavior("Catch", "Human2", new Catch_Params(10.5, 2.4, "ball2", "Left"));
+            // Human 2 - Walk toward box, pickup red ball, exchange red ball for others
+            //           blue ball, walk backward, then catch red ball thrown by other
+            //           and throw blue ball to other.
+            g_simulator->doBehavior("Walk", "Human2", 
+                new Walk_Params(0, 4, 0.3, 3.14));
+            g_simulator->doBehavior("PickUp", "Human2", 
+                new PickUp_Params(0.5, 3, "ball2", "Left"));
+            g_simulator->doBehavior("GiveObj", "Human2", 
+                new GiveObj_Params(4, 2, "Human1", "ball2", "Right"));
+            g_simulator->doBehavior("Walk", "Human2", 
+                new Walk_Params(5, 3.5, 0.15, 3.14));
+            g_simulator->doBehavior("Throw", "Human2", 
+                new Throw_Params(8, 2, "Right", "ball1", Vector3d(0., 2., -4.5)));
+            g_simulator->doBehavior("Catch", "Human2", 
+                new Catch_Params(10.5, 2.4, "ball2", "Left"));
         }
     }
     //Execute each simulation step of CartWheel
