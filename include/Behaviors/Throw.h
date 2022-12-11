@@ -19,6 +19,7 @@ namespace CartWheel {
             Vector3d speed;
             Core::Human* human;
             Core::BehaviourController* bcontroller;
+            bool bThrowFinished;
             
         protected:
             virtual void runStep();
