@@ -4,16 +4,16 @@ To see some examples of bipedal motion control animations, the `./Demos` folder 
 
  | Executable Demos Source File  | Animation Description                                   |
  | :---------------------------- | :------------------------------------------------------ |
- |  interactControl_Demos1.cpp | A human character walking up to an upright box column and kicking it over. |
- |interactControl_Demos2.cpp | A human character walking from right to left and tripping over a box placed on the ground in his path of motion. |
- | interactControl_Exchange.cpp | Two human characters, where first both of them grab an object from a box, one of them kicks the box and then both exchange objects with each other. |
- | interactControl_GiveObj.cpp | Two human characters, where first one of them grabs an object from a box, kicks the box and then gives such object to the other person. |
- | interactControl_JumpBF.cpp | A human jump rotating Backwards or Forwards according to the code being activated (to jump rotating Backwards or Normally [with no rotation], the code from `./src/Behaviors/Jump.cpp` must be activated by uncommenting the lines that describe such jumps and commenting the lines of the jump that was being used). |
- | interactControl_JumpN.cpp | This makes the human to jump normally over a box. |
- | interactControl_Pull.cpp | The human character goes toward an object grabs the handle and tries to pull it some distance backwards. |
- | interactControl_Push.cpp | The human character walking toward a big box and then starts pushing it to some distance. |
- | interactControl_SitDown.cpp | The human character appears just in front of a box and starts executing the motions to sit down on such box. |
- | interactControl_ThrowCatch.cpp | Two human characters appears on the scene, one of them grabs an object from a box, then kicks such box, gives the object to another person in front of him and starts walking backwards, so the person that has the object tries to throw it toward the other and then the person that is going to receive the object, moves an arm in order to catch it. |
+ | `interactControl_Demos1.cpp` | A human character walking up to an upright box column and kicking it over. |
+ |`interactControl_Demos2.cpp` | A human character walking from right to left and tripping over a box placed on the ground in his path of motion. |
+ | `interactControl_Exchange.cpp` | Two human characters, where first both of them grab an object off a box, one of them kicks the box and then both exchange objects with each other. |
+ | `interactControl_GiveObj.cpp` | Two human characters, where first one of them grabs an blue ball off a box, kicks the box and then gives such ball to the other person. |
+ | `interactControl_JumpBF.cpp` | A human jump rotating Backwards or Forwards according to the code being activated (to jump rotating Backwards or Normally [with no rotation], the code from `./src/Behaviors/Jump.cpp` must be activated by uncommenting the lines that describe such jumps and commenting the lines of the jump that was being used). |
+ | `interactControl_JumpN.cpp` | This makes the human to jump normally over a box. |
+ | `interactControl_Pull.cpp` | The human character goes toward an object grabs the handle and tries to pull it some distance backwards. |
+ | `interactControl_Push.cpp` | The human character walking toward a big box and then starts pushing it to some distance. |
+ | `interactControl_SitDown.cpp` | The human character appears just in front of a box and starts executing the motions to sit down on such box. |
+ | `interactControl_ThrowCatch.cpp` | Two human characters appears on the scene, one of them grabs a blue ball off a box, then kicks such box, gives the ball to another person in front of him and starts walking backwards, so the person that has the ball tries to throw it toward the other and then the person that is going to receive the ball, moves an arm in order to catch it. |
 
 These demo animation executables, which require read access to animated motion control modeling and visualization asset files in the `./data` folder, should be invoked from the top-level `./ua-cartwheel` folder as:
 
