@@ -728,10 +728,10 @@ void ODEWorld::advanceInTime(double deltaT) {
     dSpaceCollide(spaceID, this, &collisionCallBack);
 
     //advance the simulation
-//    dWorldStepFast1(worldID, deltaT, 50);
-//    dWorldStep(worldID, deltaT);
-    	dWorldQuickStep(worldID, deltaT);
-    //	runTestStep(worldID, deltaT);
+//  dWorldStepFast1(worldID, deltaT, 50);
+    dWorldStep(worldID, deltaT);
+//  dWorldQuickStep(worldID, deltaT);
+//	runTestStep(worldID, deltaT);
 
     //copy over the state of the ODE bodies to the rigid bodies...
     setRBStateFromEngine();
