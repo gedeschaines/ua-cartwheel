@@ -36,7 +36,7 @@ void render(void) {  // Simulation loop
         {
 
             // Human1 - pickup ball, kick box and give ball to Human2, then walk
-            // backwards to be ready to catch ball thrown by Human1
+            //          backwards to be ready to catch ball thrown by Human1
             g_simulator->doBehavior("Walk", g_visualization->getSelectedHuman().c_str(),
                 new Walk_Params(0, 1, 0.3, 0));
             g_simulator->doBehavior("PickUp", g_visualization->getSelectedHuman().c_str(),
@@ -53,7 +53,7 @@ void render(void) {  // Simulation loop
                 new Standing_Params(11, 4));
 
             // Human2 - walk toward box, get ball, stand still and throw ball
-            // to Human1, then walk forward again.
+            //          to Human1, then walk slowly forward again.
             g_simulator->doBehavior("Walk", "Human2",
                 new Walk_Params(0, 4, 0.3, 3.14));
             g_simulator->doBehavior("Standing", "Human2",

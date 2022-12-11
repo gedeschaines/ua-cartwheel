@@ -50,7 +50,7 @@ void render(void) { //Simulation loop
                 new Throw_Params(10, 2, "Right", "ball2", Vector3d(0., 2., 4.5)));
             
             // Human 2 - Walk toward box, pickup red ball, exchange red ball for others
-            //           blue ball, walk backward, then catch red ball thrown by other
+            //           blue ball, walk slowly forward to catch red ball thrown by other
             //           and throw blue ball to other.
             g_simulator->doBehavior("Walk", "Human2", 
                 new Walk_Params(0, 4, 0.3, 3.14));
