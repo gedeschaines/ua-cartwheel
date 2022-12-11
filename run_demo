@@ -1,0 +1,66 @@
+#!/bin/bash
+
+#FILE: run_demo
+#DATE: 11 DEC 2022
+#AUTH: G. E. Deschaines
+#PROG: Shell script to run UA-Cartwheel interative control Demos.
+#DESC: Invokes named executable ./Demos/interactControl_{name}.exe
+#      file if 'name' is in DEMOS_LIST and associated executable 
+#      built by 'make demos' having been run.
+
+# Extract Demo names from listing of *.cpp files in ./Demos directory.
+DEMOS_LIST="`ls -x -w 0 ./Demos/*.cpp | sed -E 's/\w*.\/Demos\/interactControl_//g' | sed 's/.cpp//g'`"
+
+function check_named_Demo() {
+# Returns 1 if named Demo executable exists; otherwise returns 0.
+  local N=$1
+  for D in $DEMOS_LIST
+  do
+    if [ "$N" == "$D" ]
+    then
+      if [ ! -e ./Demos/interactControl_${D}.exe ]
+      then
+        echo "error:  Executable ./Demos/${N}.exe does not exist."
+        echo "        run 'make demos'"
+        return 0
+      fi
+      return 1
+    fi
+  done
+  echo "error:  Demos '${N}' does not exist."
+  echo "        check spelling; name must be in"
+  echo "        [${DEMOS_LIST}]"
+  return 0
+}
+
+# Check command line arguments.
+if [ $# -lt 1 ]
+then
+  echo "usage:  run_demo name"
+  echo "where:  name - a named ./Demos/interactControl_{name}.exe file"
+  exit -1
+fi
+NAME=$1
+
+# Check if named Demo executable exists.
+check_named_Demo $NAME
+if [ $? -eq 0 ]
+then
+  exit -2
+fi
+
+# Add path of Cartwheel shared library to linker load library path.
+if [ ! -e ./lib/libcartwheel.so ]
+then
+  echo "error:  Cartwheel shared library does not exist."
+  echo "        run 'make library'"
+  exit -3
+fi
+LD_LIBRARY_PATH=./lib:${LD_LIBRARY_PATH}
+
+# Initiate execution of named Demo.
+./Demos/interactControl_${NAME}.exe
+
+# Return execution exit status.
+exit $?
+
