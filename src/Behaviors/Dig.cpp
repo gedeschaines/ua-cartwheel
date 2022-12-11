@@ -40,7 +40,7 @@ void Dig::onInit() {
 void Dig::runStep() {    
 //    if (time > endTime-duration*0.9 and bDigFinishing==false) {
 //        cw->setController(humanName, 0);
-//        printf("-------Time: %f", time);
+//        printf("-------Time: %f\n", time);
 //        bDigFinishing = true;
 //    }
     human->setLock("pelvis", true, true);

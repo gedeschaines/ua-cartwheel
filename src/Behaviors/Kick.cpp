@@ -25,7 +25,7 @@ void Kick::onInit() {
 void Kick::runStep() {    
     if (time > endTime-duration*0.5 and bKickFinishing==false) {
         cw->setController(humanName, 0);
-        printf("-------Time: %f", time);
+        printf("-------Time: %f\n", time);
         bKickFinishing = true;
     }
 //    if (human->getFootTouchedGround()==true)
