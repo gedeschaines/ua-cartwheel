@@ -24,8 +24,11 @@ To build the shared library and executables, run:
 To run the `interactControl` program from within top-level `./ua-cartwheel` folder, add `./lib` folder containing Cartwheel shared library file (`libcartwheel.so`) to the LD_LIBRARY_PATH enviroment variable and invoke `interactControl` executable binary file located in `./bin` folder with following shell command sequence:
 
 ````shell
-    export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH; ./bin/interactControl
+    LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH
+    ./bin/interactControl
 ````
+
+Setting the LD_LIBRARY_PATH environment variable need only be done once during a command shell terminal session before running the `interactControl` program or any derivative demonstration programs.
 
 The `interactControl` program provides an operational example of concurrent visualization and interative motion control of two animated characters in a simulated physical environment utilizing [Open Dynamics Engine](http://www.ode.org/) (ODE) for rigid body dynamics and OpenGL for 3D rendering. In addition to the aforementioned interactive control demonstration programs described in [Cartwheel_Readme](./Cartwheel_Readme.md), other program executables are listed below.
 
@@ -68,6 +71,7 @@ In the list below, names beginning with `./` indicate a folder, and those within
 - `doxyconf` - **Doxygen** program configuration file
 - `LICENSE-2.0.txt` - Apache License, Version 2.0 text file
 - `Makefile` - **make** utility script file for building Cartwheel library and executables
+- `run_demo` - shell script file to run a named `interactControl` demonstration program
 - `README.md` - this file
 
 ## Source Links ##
