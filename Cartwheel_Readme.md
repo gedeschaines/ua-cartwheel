@@ -18,7 +18,7 @@ To see some examples of bipedal motion control animations, the `./Demos` folder 
 These demo animation executables, which require read access to animated motion control modeling and visualization asset files in the `./data` folder, should be invoked from the top-level `./ua-cartwheel` folder as:
 
 ````shell
-    export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH; ./Demos/interactControl_{unique demo name}.exe
+    LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH; ./Demos/interactControl_{unique demo name}.exe
 ````
 
 The executables are built using the `make all` (or `make demos`) process as described in the [README](./README.md) file.
