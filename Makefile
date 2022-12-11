@@ -44,6 +44,7 @@ endif
 # Used to have LPATH in front
 LIBS = $(GLLIBS) $(MISCLIBS)
 
+INC_FILES := $(wildcard includes/**/*.h)
 CPP_FILES := $(wildcard src/**/*.cpp)
 OBJ_FILES := $(CPP_FILES:.cpp=.o)
 DEMO_SRCS := $(wildcard Demos/*.cpp)
@@ -62,7 +63,7 @@ CC = g++
 
 all : library interactControl interface mainControl tomsLogger demos
 
-library : $(OBJ_FILES)
+library : $(OBJ_FILES) 
 	@if [ ! -e ./lib ]; then mkdir ./lib; fi
 	$(CC) -shared $(LINK_FLAGS) $(FRAMEWORKS) $(LPATH) $(LIBS) -o lib/libcartwheel.$(LIBRARY_EXT) $(OBJ_FILES) 
 
@@ -77,26 +78,20 @@ demos : library $(DEMO_EXES)
 	$(CC) $(CFLAGS) $(FRAMEWORKS) -o $@ $< $(CWLPATH) $(LPATH) $(LIBS)
 
 clean :
-	$(RM) src/*.o src/*/*.o lib/libcartwheel.$(LIBRARY_EXT)
+	$(RM) src/*.o src/*/*.o lib/libcartwheel.$(LIBRARY_EXT) ./bin/* ./Demos/*.exe
 
-interactControl : library
+interactControl : library src/interactControl.o
 	@if [ ! -e ./bin ]; then mkdir ./bin; fi
-	@rm -f ./bin/*
-	@rm -f ./Demos/*.exe
-	$(CC) $(CFLAGS) $(IPATH) -o src/interactControl.o -c src/interactControl.cpp
-	$(CC) $(CFLAGS) $(FRAMEWORKS) -o bin/interactControl src/interactControl.o $(CWLPATH) $(LPATH)  $(LIBS)
+	$(CC) $(CFLAGS) $(FRAMEWORKS) -o bin/interactControl src/interactControl.o $(CWLPATH) $(LPATH) $(LIBS)
 	
-interface : library
+interface : library src/interface.o
 	@if [ ! -e ./bin ]; then mkdir ./bin; fi
-	$(CC) $(CFLAGS) $(IPATH) -o src/interface.o -c src/interface.cpp
 	$(CC) $(CFLAGS) $(FRAMEWORKS) -o bin/interface src/interface.o $(CWLPATH) $(LPATH) $(LIBS)
 
-mainControl : library
+mainControl : library src/mainControl.o 
 	@if [ ! -e ./bin ]; then mkdir ./bin; fi
-	$(CC) $(CFLAGS) $(IPATH) -o src/mainControl.o -c src/mainControl.cpp
 	$(CC) $(CFLAGS) $(FRAMEWORKS) -o bin/mainControl src/mainControl.o $(CWLPATH) $(LPATH) $(LIBS)
 
-tomsLogger : library
+tomsLogger : library src/tomsLogger.o
 	@if [ ! -e ./bin ]; then mkdir ./bin; fi
-	$(CC) $(CFLAGS) $(IPATH) -o src/tomsLogger.o -c src/tomsLogger.cpp
 	$(CC) $(CFLAGS) $(FRAMEWORKS) -o bin/tomsLogger src/tomsLogger.o $(CWLPATH) $(LPATH) $(LIBS)
