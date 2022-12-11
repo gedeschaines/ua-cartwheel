@@ -358,7 +358,7 @@ bool CartWheel3D::isBehaviorsDone() {
 
 void CartWheel3D::runStep(double dt) {
     //cout << "CartWheel3D::runStep" << endl;
-    _nTime += dt;
+
     DynamicArray<ContactPoint>* contactPoints = _world->getContactForces();
     DynamicArray<Vector3d> humanPositions;
     
@@ -376,14 +376,15 @@ void CartWheel3D::runStep(double dt) {
             BehaviourController* b = human->getBehaviour();
             if (NULL != b) {
                 if (b->shouldAbort()) {
-                    cout << "Should Abort?!" << endl;
+                    cout << "PreTasks - Should Abort?!" << endl;
                 }
             }
         }
     }
-    _world->advanceInTime(dt);
 
-    //cout << "CartWheel3D::runStep" << endl;
+    _world->advanceInTime(dt);
+    _nTime += dt;
+    
     bool isHumansWorking = false;
     bool isObjsWorking = false;
     contactPoints = _world->getContactForces();
@@ -400,12 +401,11 @@ void CartWheel3D::runStep(double dt) {
             BehaviourController* b = human->getBehaviour();
             if (NULL != b) {
                 if (b->shouldAbort()) {
-
+                    cout << "PostTasks - Should Abort?!" << endl;
                 }
             }
         }        
         if(_behaviorsManager->runStep(human->getName().c_str(), _nTime)) {
-//            printf("nTime: %f\n", _nTime);
             isHumansWorking = true;
         }
     }
@@ -415,8 +415,10 @@ void CartWheel3D::runStep(double dt) {
         }
     }
     if(!isHumansWorking && !isObjsWorking) {
+        //printf("No workers at nTime: %f\n", _nTime);
         _behaviorsManager->setBehaviorsDone(true);
-    } 
+    }
+    //cout << "CartWheel3D::runStep" << endl;
 }
 
 Math::Vector3d CartWheel3D::getHumanPosition(const std::string& name) {
