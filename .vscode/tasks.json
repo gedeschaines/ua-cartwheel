@@ -65,5 +65,13 @@
                 "tomsLogger"
             ],
         },
+        {
+            "label": "clean",
+            "type": "process",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+        },
     ]
 }
