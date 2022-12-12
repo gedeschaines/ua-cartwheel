@@ -44,7 +44,7 @@ endif
 # Used to have LPATH in front
 LIBS = $(GLLIBS) $(MISCLIBS)
 
-INC_FILES := $(wildcard includes/**/*.h)
+INC_FILES := $(wildcard include/**/*.h)
 CPP_FILES := $(wildcard src/**/*.cpp)
 OBJ_FILES := $(CPP_FILES:.cpp=.o)
 DEMO_SRCS := $(wildcard Demos/*.cpp)
@@ -61,16 +61,20 @@ CC = g++
 
 ## Target depedencies and make rules
 
+.PHONY : all library interactControl interface mainControl tomsLogger clean
+
 all : library interactControl interface mainControl tomsLogger demos
 
-library : $(OBJ_FILES) 
+library : $(OBJ_FILES)
 	@if [ ! -e ./lib ]; then mkdir ./lib; fi
-	$(CC) -shared $(LINK_FLAGS) $(FRAMEWORKS) $(LPATH) $(LIBS) -o lib/libcartwheel.$(LIBRARY_EXT) $(OBJ_FILES) 
+	$(CC) -shared $(LINK_FLAGS) $(FRAMEWORKS) $(LPATH) $(LIBS) -o lib/libcartwheel.$(LIBRARY_EXT) $(OBJ_FILES)
 
-demos : library $(DEMO_EXES)
+demos : $(DEMO_EXES)
+
+$(DEMO_EXES) : library $(DEMO_OBJS) 
 
 # The default way to convert .cpp files into .o files.
-%.o : %.cpp
+%.o : %.cpp $(INC_FILES)
 	$(CC) $(CFLAGS) $(IPATH) -o $@ -c $<
 
 # The default way to convert .o files into .exe files.
@@ -78,17 +82,17 @@ demos : library $(DEMO_EXES)
 	$(CC) $(CFLAGS) $(FRAMEWORKS) -o $@ $< $(CWLPATH) $(LPATH) $(LIBS)
 
 clean :
-	$(RM) src/*.o src/*/*.o lib/libcartwheel.$(LIBRARY_EXT) ./bin/* ./Demos/*.exe
+	$(RM) src/*.o src/*/*.o lib/libcartwheel.$(LIBRARY_EXT) ./bin/* ./Demos/*.o ./Demos/*.exe
 
 interactControl : library src/interactControl.o
 	@if [ ! -e ./bin ]; then mkdir ./bin; fi
 	$(CC) $(CFLAGS) $(FRAMEWORKS) -o bin/interactControl src/interactControl.o $(CWLPATH) $(LPATH) $(LIBS)
-	
+
 interface : library src/interface.o
 	@if [ ! -e ./bin ]; then mkdir ./bin; fi
 	$(CC) $(CFLAGS) $(FRAMEWORKS) -o bin/interface src/interface.o $(CWLPATH) $(LPATH) $(LIBS)
 
-mainControl : library src/mainControl.o 
+mainControl : library src/mainControl.o
 	@if [ ! -e ./bin ]; then mkdir ./bin; fi
 	$(CC) $(CFLAGS) $(FRAMEWORKS) -o bin/mainControl src/mainControl.o $(CWLPATH) $(LPATH) $(LIBS)
 
